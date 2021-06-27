@@ -1,0 +1,372 @@
+<html>
+  <head>
+    <title>Formularios</title>
+  </head>
+  <body>
+
+    <p><a href="../../index.html" target="_blank">Volver al index.</a></p>
+
+    <h2>1) Ingrese 2 valores para sumarlos:</h2>
+
+    <label form="valor1">Valor 1:</label>
+    <input type="number" id="valor1_suma" step="1">
+
+    <label form="valor2">Valor 2:</label>
+    <input type="number" id="valor2_suma" step="1">
+
+    <button onclick="FuncionSuma()">Sumar</button>
+
+    <p>
+      <label form="f_total">Total:</label>
+      <input type="number" id="total_suma" readonly>
+    </p>
+
+    <script>
+      function FuncionSuma() {
+
+        document.getElementById("total_suma").value = parseFloat(document.getElementById("valor1_suma").value) + parseFloat(document.getElementById("valor2_suma").value)
+
+      }
+    </script>
+
+    <h2>2) Ingrese 4 valores para saber cuál es el mayor:</h2>
+
+    <label form="f_valor1">Valor 1:</label>
+    <input type="number" id="valor1">
+    
+    <label form="f_valor2">Valor 2:</label>
+    <input type="number" id="valor2">
+
+    <label form="f_valor3">Valor 3:</label>
+    <input type="number" id="valor3">
+
+    <label form="f_valor4">Valor 4:</label>
+    <input type="number" id="valor4_add">
+
+    <button onclick="FuncionMayor()">¿Cuál es el mayor?</button>
+
+    <p>
+      <label form="f_mayor">Mayor:</label>
+      <input type="number" id="mayor" readonly>
+    </p>
+
+    <script>
+      function FuncionMayor() {
+        v1 = parseFloat(document.getElementById("valor1").value)
+        v2 = parseFloat(document.getElementById("valor2").value)
+        v3 = parseFloat(document.getElementById("valor3").value)
+        v4 = parseFloat(document.getElementById("valor4_add").value)
+
+        if (v1>=v2 && v1>=v3 && v1>=v4){
+          document.getElementById("mayor").value = v1
+        }
+        else{
+          if (v2>=v1 && v2>=v3 && v2>=v4){
+            document.getElementById("mayor").value = v2
+          }
+          else{
+            if (v3>=v1 && v3>=v2 && v3>=v4){
+              document.getElementById("mayor").value = v3
+            }
+            else{
+              document.getElementById("mayor").value = v4
+            }
+          }
+        }
+
+      }
+    </script>
+
+    <h2>3) Ingrese texto y luego la cantidad de veces que quiera repetirlo:</h2>
+
+    <label form="f_valor4">Ingrese texto:</label>
+    <input id="valor4" size="50">
+
+    <label form="f_valor5">Ingrese número de repeticiones:</label>
+    <input type="number" id="valor5">
+
+    <button onclick="FuncionRepeticion()">Repetir</button>
+
+    <p>
+      <label form="f_repetir">Texto repetido:</label>
+      <input id="repetir" size="100" readonly>
+    </p>
+
+    <script>
+      function FuncionRepeticion() {
+        texto = document.getElementById("valor4").value
+        numero = parseFloat(document.getElementById("valor5").value)
+        texto_final = ""
+
+        for(i=0; i<numero; i++){
+            texto_final = texto_final + texto + " | "
+        }
+
+        document.getElementById("repetir").value = texto_final.slice(0,-3)
+
+      }
+    </script>
+
+    <h2>4) Conversor de temperatura en grados celsius y fahrenheit:</h2>
+
+    <label form="f_temp_g">Temperatura en celsius:</label>
+    <p hidden id="p_g"></p>
+    <input type="number" id="temp_g" step="1">
+
+    <label form="f_temp_f">Temperatura en fahrenheit:</label>
+    <p hidden id="p_f"></p>
+    <input type="number" id="temp_f" step="1">
+
+    <button onclick="FuncionConvertirTemperatura()">Convertir</button>
+
+    <script>
+      function FuncionConvertirTemperatura() {
+
+        celsius = document.getElementById("temp_g").value
+        fahrenheit = document.getElementById("temp_f").value
+        celsius_anterior = document.getElementById("p_g").innerHTML
+        fahrenheit_anterior = document.getElementById("p_f").innerHTML
+
+        if ((celsius != "" && fahrenheit == "" && celsius_anterior == "" && fahrenheit_anterior == "") || (celsius != "" && fahrenheit != "" && celsius_anterior == "" && fahrenheit_anterior == "") || (celsius != "" && fahrenheit != "" && celsius_anterior != parseFloat(celsius) && fahrenheit_anterior == parseFloat(fahrenheit)) || (celsius != "" && fahrenheit != "" && celsius_anterior != parseFloat(celsius) && fahrenheit_anterior != parseFloat(fahrenheit))){
+          document.getElementById("temp_f").value = (parseFloat(celsius) * 1.8) + 32
+        }
+        else{
+          if ((celsius == "" && fahrenheit != "" && celsius_anterior == "" && fahrenheit_anterior == "") || (celsius != "" && fahrenheit != "" && celsius_anterior == parseFloat(celsius) && fahrenheit_anterior != parseFloat(fahrenheit))){
+            document.getElementById("temp_g").value = (parseFloat(fahrenheit) - 32) * (5/9)
+          }
+          else{
+            document.getElementById("temp_f").value = fahrenheit
+            document.getElementById("temp_g").value = celsius
+          }
+        }
+
+        document.getElementById("p_g").innerHTML = document.getElementById("temp_g").value
+        document.getElementById("p_f").innerHTML = document.getElementById("temp_f").value
+
+      }
+    </script>
+  
+    <h2>5) Escribir un texto y mostrar la cantidad de caracteres:</h2>
+
+    <label form="f_texto_5">Escribir texto:</label>
+    <input id="texto_5" size="100">
+
+    <button onclick="FuncionCantidadCaracteres()">Mostrar</button>
+
+    <p>
+      <label form="f_cantidad_caracteres">Cantidad de caracteres:</label>
+      <input id="cantidad_caracteres" readonly>
+    </p>
+
+    <script>
+      function FuncionCantidadCaracteres() {
+        
+        texto = document.getElementById("texto_5").value
+        cont = 0
+
+        for (i = 0, t = texto.length; i < t; i++) {
+          if (texto[i] !== ' '){
+            cont++
+          }
+        }
+
+        document.getElementById("cantidad_caracteres").value = cont
+
+      }
+    </script>
+
+    <h2>6) Ingresar un número para saber si es par:</h2>
+
+    <label form="f_numero_valor">Valor:</label>
+    <input type = "number" id="numero_valor">
+
+    <button onclick="FuncionEsPar()">¿Es par?</button>
+    <input id="par_o_no" readonly size="26">
+
+    <script>
+      function FuncionEsPar() {
+        
+        numero = document.getElementById("numero_valor").value
+        
+        if(numero == ""){
+          document.getElementById("par_o_no").value = "Poné un número capo mastodonte."
+        }
+        else{
+          if(parseFloat(numero)%2 == 0){
+            document.getElementById("par_o_no").value = "Sí :D"
+          }
+          else{
+            document.getElementById("par_o_no").value = "No :("
+          }
+        }
+
+      }
+    </script>
+
+    <h2>7) Se muestran los múltiplos de 3 comprendidos entre 1 y 20:</h2>
+
+    <button onclick="FuncionMultiplosDeTres()">Mostrar</button>
+    <input id="multiplos" readonly size="25">
+
+    <script>
+      function FuncionMultiplosDeTres() {
+        
+        document.getElementById("multiplos").value= ""
+        texto = ""
+
+        for (i = 1; i <= 20; i++){
+          if(i%3 == 0){
+            texto = texto + i + ", "
+          }
+        }
+
+        document.getElementById("multiplos").value = texto.slice(0,-2)
+
+      }
+    </script>
+
+    <h2>8) Se mostrarán los números primos hasta lo que escriba el usuario:</h2>
+
+    <label form="f_numero_usuario">Número (se tomará como positivo siempre):</label>
+    <input type = "number" id="numero_usuario">
+
+    <button onclick="FuncionNumerosPrimos()">Mostrar números primos</button>
+    <p>
+      <label form="f_primos">Números primos:</label>
+      <input id="primos" readonly size="100">
+    </p>
+
+    <script>
+      function FuncionNumerosPrimos() {
+        
+        numero = document.getElementById("numero_usuario").value
+        contador = 0
+        texto = "1, "
+
+        if (numero == "" || (parseInt(numero) > -1 && parseInt(numero) < 1)){
+          texto = ""
+        }
+
+        numero = parseInt(numero)
+        if (numero < 0){
+          numero = numero * -1
+        }
+
+        for (i = 1; i <= numero; i++){
+          contador = 0
+          for (x = 1; x <= i / 2; x++){
+            if (i%x == 0){
+              contador++
+            }
+          }
+          if (contador == 1){
+            texto = texto + i + ", "
+          }
+        }
+
+        document.getElementById("primos").value = texto.slice(0,-2)
+
+      }
+    </script>
+
+    <h2>9) Ingrese los datos para crear un párrafo:</h2>
+
+    <label form="f_nombre">Nombre:</label>
+    <input id="nombre">
+
+    <label form="f_apellido">Apellido:</label>
+    <input id="apellido">
+
+    <label form="f_edad">Edad:</label>
+    <input type="number" id="edad">
+
+    <label form="f_ciudad">Ciudad:</label>
+    <input id="ciudad">
+
+    <button onclick="FuncionParrafo()">Crear párrafo</button>
+
+    <p>
+      <b>Párrafo:</b>
+    </p>
+    <p id="parrafo_final">Este va a ser el párrafo.</p>
+
+    <script>
+      function FuncionParrafo() {
+        nombre = document.getElementById("nombre").value
+        apellido = document.getElementById("apellido").value
+        edad = document.getElementById("edad").value
+        ciudad = document.getElementById("ciudad").value
+
+        if(nombre == "" || apellido == "" || edad == "" || ciudad == ""){
+          document.getElementById("parrafo_final").innerHTML = "Faltan datos ameo."
+        }
+        else{
+          document.getElementById("parrafo_final").innerHTML = "Mi nombre es " + nombre + " " + apellido + ", tengo " + edad + " años. Nací en la ciudad de " + ciudad + "."
+        }
+
+      }
+    </script>
+
+    <h2>10) Ingrese 2 valores y se mostrarán los números enteros intermedios:</h2>
+
+    <label form="f_valor_intermedio_1">Valor 1:</label>
+    <input type="number" id="valor_intermedio_1">
+
+    <label form="f_valor_intermedio_2">Valor 2:</label>
+    <input type="number" id="valor_intermedio_2">
+
+    <button onclick="FuncionValoresIntermedios()">Mostrar</button>
+
+    <p>
+      <label form="f_valores_intermedios">Números intermedios:</label>
+      <input id="valores_intermedios" readonly size="100">
+    </p>
+
+    <script>
+      function FuncionValoresIntermedios() {
+        valor1 = document.getElementById("valor_intermedio_1").value
+        valor2 = document.getElementById("valor_intermedio_2").value
+        document.getElementById("valores_intermedios").value = ""
+        contador = 0
+        texto = ""
+
+        if(valor1 != "" && valor2 != ""){
+          valor1 = parseInt(valor1)
+          valor2 = parseInt(valor2)
+
+          if(valor1 == valor2){
+            document.getElementById("valores_intermedios").value = "Los números son iguales."
+          }
+          else{
+            if(valor1 < valor2){
+              for(i=valor1+1; i<=valor2-1; i++){
+                texto = texto + i + ", "
+                contador++
+              }
+              if(contador == 0){
+                document.getElementById("valores_intermedios").value = "No hay valores intermedios."
+              }
+              else{
+                document.getElementById("valores_intermedios").value = texto.slice(0,-2)
+              }
+            }
+            else{
+              for(i=valor1-1; i>=valor2+1; i--){
+                texto = texto + i + ", "
+                contador++
+              }
+              if(contador == 0){
+                document.getElementById("valores_intermedios").value = "No hay valores intermedios."
+              }
+              else{
+                document.getElementById("valores_intermedios").value = texto.slice(0,-2)
+              }
+            }
+          }
+        }
+
+      }
+    </script>
+
+  </body>
+</html>
